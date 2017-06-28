@@ -1,0 +1,16 @@
+---
+- hosts: vMX
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: install config to device 
+      junos_install_config:
+        host: "{{ inventory_hostname }}"
+        user: 'regress'
+        passwd: 'MaRtInI'
+        ignore_warning: 
+          - "statement not found"
+          - "testing"
+        file: ignore_warning.set 
+      register: junos

@@ -1,0 +1,20 @@
+---
+- hosts: vMX
+  connection: local
+  gather_facts: no
+  vars:
+    timestamp: $PIPE(date +%Y%m%d%H%M%S)
+
+  tasks:
+    - name: print time
+      debug: msg={{ timestamp }}
+
+    - name: I've made a huge mistake
+      junos_get_facts:
+        host={{ inventory_hostname }}
+        user='regress'
+        passwd='MaRtInI'
+      register: junos
+
+    - name: Verify JUNOS version
+      debug: msg="{{junos.facts}}"

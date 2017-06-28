@@ -1,0 +1,16 @@
+---
+- name: Junos OS version
+  hosts: vMX 
+  roles:
+    - Juniper.junos
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: Get rpc run
+      junos_rpc:
+        host={{ inventory_hostname }}
+        user=regress
+        passwd=MaRtInI
+        rpc=get-config
+        dest=get_config.conf
+      register: junos
